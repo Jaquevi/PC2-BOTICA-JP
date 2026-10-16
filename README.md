@@ -22,6 +22,14 @@ Mantén ambas terminales abiertas mientras utilizas la aplicación.
 
 Para detener cada servidor, presiona Ctrl+C en su terminal.
 
+### Publicación en Netlify
+
+Netlify compila Angular y publica también la API mediante `netlify/functions/api.js`. La configuración de `netlify.toml` utiliza `npm run build` y publica `dist/jp-botica/browser`. El sitio debe estar conectado al repositorio para que el despliegue incluya las funciones; subir solamente la carpeta `dist` no publica la API.
+
+Angular consulta `/api/productos` en el mismo sitio. En Netlify, esa ruta ejecuta JSON Server con los datos de `db.json`; no se conecta a localhost ni necesita que tu computadora esté encendida. La API online es de solo lectura. Para cambiar los productos, actualiza `db.json` y vuelve a desplegar.
+
+En desarrollo puedes seguir usando `ng serve` y `npm.cmd run api`: `proxy.conf.json` dirige `/api/productos` al JSON Server local. Reinicia `ng serve` después de actualizar la configuración del proxy.
+
 ## Cuenta de prueba
 
 - Correo: `admin@jp.pe`
@@ -70,7 +78,7 @@ npm.cmd test
 
 La compilación de producción se genera en `dist/jp-botica/browser/`. Las pruebas ejecutan los servicios reales con un LocalStorage aislado: credenciales y persistencia, logout, datos de sesión corruptos, almacenamiento bloqueado, límite de stock, total del carrito y campos/imágenes de db.json.
 
-Verificación realizada: compilación final sin errores y cinco pruebas automatizadas aprobadas. En navegador se comprobaron login vacío e incorrecto, acceso correcto, persistencia al recargar, cierre de sesión, redirección sin sesión, catálogo REST e imágenes, filtros, carrito y recuperación de la API tras detenerla. Se revisaron el Dashboard y el catálogo en escritorio y móvil sin desbordamiento horizontal. La vista del Dashboard se conserva en `docs/dashboard-pc2.jpg`.
+Las pruebas incluyen sesión, carrito y datos del catálogo, además de las rutas pública e interna de la función, consultas por id y categoría, errores 404 y rechazo de escrituras en la API publicada. La vista del Dashboard se conserva en `docs/dashboard-pc2.jpg`.
 
 ## Organización
 
@@ -89,5 +97,10 @@ src/app/
 public/images/              Imágenes de productos
 db.json                     Base de datos simulada
 tests/core.test.mjs          Pruebas automatizadas
+tests/api.test.mjs           Pruebas de la API publicada
+netlify/functions/api.js    JSON Server para Netlify Functions
+netlify.toml                Compilación y publicación
+proxy.conf.json             Conexión con la API local
+```
 
 

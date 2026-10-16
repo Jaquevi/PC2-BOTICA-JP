@@ -6,7 +6,7 @@ import { Producto } from './producto.model';
 @Injectable({ providedIn: 'root' })
 export class ProductosService {
   private readonly http = inject(HttpClient);
-  private readonly endpoint = 'http://127.0.0.1:3000/productos';
+  private readonly endpoint = '/api/productos';
   readonly productos = signal<Producto[]>([]);
   readonly cargando = signal(false);
   readonly error = signal('');
@@ -18,7 +18,7 @@ export class ProductosService {
     this.productos.set([]);
     this.http.get<Producto[]>(this.endpoint).pipe(timeout(8000), finalize(() => this.cargando.set(false))).subscribe({
       next: productos => this.productos.set(productos),
-      error: () => this.error.set('No se pudo cargar el catálogo. Comprueba que JSON Server esté ejecutándose con npm run api y vuelve a intentar.')
+      error: () => this.error.set('No se pudo cargar el catálogo. Comprueba la conexión con la API y vuelve a intentar.')
     });
   }
 }
