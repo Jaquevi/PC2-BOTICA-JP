@@ -2,13 +2,12 @@ import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { CUENTA_DEMO, SessionService } from '../../core/session.service';
+import { SessionService } from '../../core/session.service';
 
 @Component({ selector: 'app-login', imports: [CommonModule, FormsModule, RouterLink], templateUrl: './login.html' })
 export class LoginComponent {
   readonly sesion = inject(SessionService);
   private readonly router = inject(Router);
-  readonly cuentaDemo = CUENTA_DEMO;
   readonly error = signal('');
   correo = '';
   clave = '';
@@ -21,7 +20,7 @@ export class LoginComponent {
     }
     try {
       if (!this.sesion.iniciar(this.correo, this.clave)) {
-        this.error.set('Correo o contraseña incorrectos. Usa la cuenta de prueba indicada.');
+        this.error.set('Correo o contraseña incorrectos.');
         return;
       }
       this.clave = '';
