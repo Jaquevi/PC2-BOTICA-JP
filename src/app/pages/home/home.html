@@ -1,0 +1,14 @@
+<section class="hero"><div class="container hero-content">
+  <div><span class="eyebrow">CERCA DE TI, TODOS LOS DÍAS</span><h1>Tu botica de confianza</h1>
+    <p>Medicamentos, vitaminas y productos de cuidado personal al alcance de tu mano.</p>
+    <div class="d-flex flex-wrap gap-3"><a routerLink="/productos" class="btn-primary">Ver productos</a><a routerLink="/contacto" class="btn-secondary-jp">Reserva tu producto</a></div>
+  </div><div class="hero-image" aria-hidden="true">✚</div>
+</div></section>
+<section class="section container"><div class="row g-4">
+  <div class="col-md-4"><article class="card h-100"><h2 class="h4">💚 Siempre contigo</h2><p>Conservamos la atención cercana de tu botica de barrio.</p><a routerLink="/tienda">Conoce nuestra tienda →</a></article></div>
+  <div class="col-md-4"><article class="card h-100"><h2 class="h4">🏷 Ofertas para ti</h2><p>Conoce nuestras promociones y consulta las condiciones en tienda.</p><a routerLink="/ofertas">Explorar ofertas →</a></article></div>
+  <div class="col-md-4"><article class="card h-100"><h2 class="h4">📦 Reserva y recoge</h2><p>Consulta la disponibilidad de tu producto antes de visitarnos.</p><a routerLink="/contacto">Hacer una consulta →</a></article></div>
+</div></section>
+<section class="section soft-section"><div class="container"><h2 class="section-title">Consejos de bienestar</h2><div class="row g-4">
+  @for (consejo of consejos; track consejo.titulo) { <div class="col-md-6 col-lg-4"><article class="card h-100"><h3 class="h5">{{ consejo.titulo }}</h3><p>{{ consejo.texto }}</p></article></div> }
+</div></div></section>

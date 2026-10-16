@@ -1,0 +1,24 @@
+<div class="sticky-header">
+  <div id="notification-bar">💊 JP · Juntos por el Perú. Tu salud es nuestra prioridad.</div>
+  <nav class="navbar navbar-expand-lg container" aria-label="Navegación principal">
+    <a class="navbar-brand logo" routerLink="/home" (click)="abierto.set(false)">✚ JP <span>· Juntos por el
+        Perú</span></a>
+    <button class="navbar-toggler" type="button" (click)="toggleMenu()" [attr.aria-expanded]="abierto()"
+      aria-controls="menuPrincipal" aria-label="Abrir o cerrar menú">☰</button>
+    <div id="menuPrincipal" class="collapse navbar-collapse" [class.show]="abierto()">
+      <div class="navbar-nav ms-auto">
+        @for (enlace of enlaces; track enlace.ruta) {
+        <a class="nav-link" [routerLink]="enlace.ruta" routerLinkActive="active" ariaCurrentWhenActive="page"
+          (click)="abierto.set(false)">{{ enlace.texto }}</a>
+        }
+      </div>
+      <div class="d-flex gap-2 ms-lg-3">
+        <button *ngIf="sesion.usuario()" class="btn btn-outline-danger btn-sm" (click)="salir()">Salir</button>
+        <button class="accesible-toggle" (click)="accesibilidad()" [attr.aria-pressed]="accesible()"
+          aria-label="Cambiar tamaño de texto">A+</button>
+        <button class="dark-toggle" (click)="tema()" [attr.aria-pressed]="oscuro()" aria-label="Cambiar tema">{{
+          oscuro() ? '☀' : '☾' }}</button>
+      </div>
+    </div>
+  </nav>
+</div>

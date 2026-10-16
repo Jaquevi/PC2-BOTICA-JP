@@ -1,0 +1,10 @@
+<section class="section container"><span class="eyebrow">TE ESPERAMOS EN JP</span><h1 class="section-title">Nuestra tienda</h1><div class="row g-4">
+  <div class="col-lg-7"><article class="card h-100"><h2 class="h4">San Juan de Lurigancho</h2><p>📍 Av. Próceres de la Independencia 3033</p><p>Cerca a la Estación San Carlos del Metro.</p><a href="https://www.google.com/maps/search/?api=1&query=Av.+Pr%C3%B3ceres+de+la+Independencia+3033+San+Juan+de+Lurigancho" target="_blank" rel="noopener noreferrer">Ver ubicación en Google Maps →</a></article></div>
+  <div class="col-lg-5"><article class="card h-100"><h2 class="h4">Horario de atención</h2><p><strong>Lunes a sábado:</strong> 8:00 a. m. a 10:00 p. m.</p><p><strong>Domingo:</strong> 9:00 a. m. a 6:00 p. m.</p><a routerLink="/contacto">Consultar disponibilidad →</a></article></div>
+</div></section>
+<section class="section soft-section"><div class="container"><h2 class="section-title">Tu carrito</h2><p class="feedback" role="status">{{ mensaje() }}</p><div class="card">
+  @for (item of carrito.items(); track item.producto.id) {
+    <div class="carrito-item"><span>{{ item.producto.nombre }} × {{ item.cantidad }}</span><div>{{ item.producto.precio * item.cantidad | currency:'PEN':'S/ ':'1.2-2' }} <button class="btn-eliminar" (click)="carrito.eliminar(item.producto.id)" [attr.aria-label]="'Eliminar ' + item.producto.nombre">Eliminar</button></div></div>
+  } @empty { <p>Tu carrito está vacío. Agrega productos desde nuestro catálogo.</p><a routerLink="/productos">Ver productos →</a> }
+  @if (carrito.items().length) { <div class="cart-total"><h3 class="h4">Total: {{ carrito.total() | currency:'PEN':'S/ ':'1.2-2' }}</h3><button class="btn-primary" (click)="finalizar()">Finalizar compra demo</button></div><small>Carrito de demostración. No procesa pagos.</small> }
+</div></div></section>

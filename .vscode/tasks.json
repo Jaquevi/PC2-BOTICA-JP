@@ -1,0 +1,8 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    { "label": "PC2: iniciar JSON Server", "type": "shell", "command": "npm", "args": ["run", "api"], "isBackground": true, "problemMatcher": [], "presentation": { "reveal": "always" } },
+    { "label": "PC2: iniciar Angular", "type": "shell", "command": "npm", "args": ["start"], "isBackground": true, "problemMatcher": [], "presentation": { "reveal": "always" } },
+    { "label": "PC2: compilar", "type": "shell", "command": "npm", "args": ["run", "build"], "group": "build", "problemMatcher": [] }
+  ]
+}

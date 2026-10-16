@@ -1,0 +1,32 @@
+<section class="section container"><span class="eyebrow">ESTAMOS PARA AYUDARTE</span>
+  <h1 class="section-title">Contáctanos</h1>
+  <div class="row g-4">
+    <div class="col-lg-7">
+      <form class="form-container" (ngSubmit)="consultar()">
+        <div class="alert alert-danger" *ngIf="catalogo.error()"><p>{{ catalogo.error() }}</p><button class="btn btn-outline-danger" type="button" (click)="catalogo.cargar()">Reintentar conexión</button></div>
+        <h2 class="h4 mb-4">Consulta un producto</h2><label for="nombre" class="form-label">Nombre
+          completo</label><input id="nombre" name="nombre" [(ngModel)]="nombre" required maxlength="100"
+          autocomplete="name" class="form-control">
+        <label for="producto" class="form-label">Producto / Medicamento</label><input id="producto" name="producto"
+          [(ngModel)]="producto" required maxlength="100" class="form-control">
+        <label for="atencion" class="form-label">Tipo de atención</label><select id="atencion" name="atencion"
+          [(ngModel)]="tipoAtencion" class="form-select">
+          <option value="recojo">Recojo en tienda</option>
+          <option value="delivery">Delivery</option>
+          <option value="consultoria">Consulta farmacéutica</option>
+        </select>
+        <button class="btn-primary" type="submit">Consultar disponibilidad</button>
+        <p class="feedback mt-3" role="status">{{ mensaje() }}</p>
+      </form>
+    </div>
+    <div class="col-lg-5">
+      <article class="card">
+        <h2 class="h4">Hablemos</h2>
+        <p>Para confirmar una reserva, comunícate con la botica.</p>
+        <div class="contact-info flex-column align-items-start"><a href="tel:+51908633134">☎ +51 908 633 134</a><a
+            href="https://wa.me/51908633134">WhatsApp →</a></div>
+        <p class="mt-4">📍 Av. Próceres de la Independencia 3033, San Juan de Lurigancho.</p>
+      </article>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,27 @@
+<section class="section container">
+  <span class="eyebrow">CUIDADO PARA TODA LA FAMILIA</span><h1 class="section-title">Nuestros productos</h1>
+  <p>Explora el catálogo de JP y consulta la disponibilidad en tienda.</p>
+  <div class="row g-3 mb-4">
+    <div class="col-md-8"><label for="busqueda" class="form-label">Buscar producto</label><input id="busqueda" class="form-control" type="search" placeholder="Nombre del medicamento…" [ngModel]="busqueda()" (ngModelChange)="busqueda.set($event)"></div>
+    <div class="col-md-4"><label for="categoria" class="form-label">Categoría</label><select id="categoria" class="form-select" [ngModel]="categoria()" (ngModelChange)="categoria.set($event)"><option>Todas</option><option *ngFor="let cat of catalogo.categorias()" [value]="cat">{{ cat }}</option></select></div>
+  </div>
+  <div class="catalog-status mb-3"><span>{{ filtrados().length }} {{ filtrados().length === 1 ? 'producto' : 'productos' }}</span><a routerLink="/tienda">Ver carrito ({{ carrito.cantidad() }}) →</a></div>
+  <p class="feedback" role="status" *ngIf="mensaje()">{{ mensaje() }}</p>
+  <div class="alert alert-info" role="status" *ngIf="catalogo.cargando()"><span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>Cargando productos…</div>
+  <div class="alert alert-danger" role="alert" *ngIf="catalogo.error()"><p>{{ catalogo.error() }}</p><button class="btn btn-outline-danger" (click)="catalogo.cargar()">Reintentar</button></div>
+  <ng-container *ngIf="!catalogo.cargando() && !catalogo.error()">
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4" *ngFor="let producto of filtrados(); trackBy: trackProducto">
+        <article class="card h-100 product-card">
+          <img class="card-img-top product-image" [src]="producto.imagen" [alt]="producto.nombre" width="360" height="220" loading="lazy" (error)="imagenAlternativa($event)">
+          <p class="category">{{ producto.categoria | uppercase }}</p><h2 class="h5">{{ producto.nombre }}</h2>
+          <p class="price">{{ producto.precio | currency:'PEN':'S/ ':'1.2-2' }}</p>
+          <p class="stock-line" [ngStyle]="{ 'font-weight': producto.stock === 0 ? '700' : '400' }">Stock: {{ producto.stock }} unidades</p>
+          <span class="badge mb-3" [ngClass]="{ 'text-bg-success': producto.stock > 0, 'text-bg-danger': producto.stock === 0 }">{{ producto.stock > 0 ? 'Disponible' : 'Agotado' }}</span>
+          <button class="btn btn-success mt-auto" (click)="agregar(producto)" [disabled]="producto.stock === 0">{{ producto.stock > 0 ? '+ Agregar al carrito' : 'Sin stock' }}</button>
+        </article>
+      </div>
+    </div>
+    <div class="alert alert-secondary" *ngIf="filtrados().length === 0">No se encontraron productos. Prueba con otro nombre o categoría.</div>
+  </ng-container>
+</section>

@@ -1,0 +1,29 @@
+<section class="section container">
+  <article class="card account-card mx-auto">
+    <span class="eyebrow">BIENVENIDO A JP</span><h1>Iniciar sesión</h1>
+    <p>Ingresa a tu cuenta para acceder al Dashboard.</p>
+    <div *ngIf="sesion.usuario(); else formularioLogin" class="alert alert-success">
+      <p>Ya tienes una sesión activa.</p><a routerLink="/dashboard" class="btn btn-success">Ir al Dashboard</a>
+    </div>
+    <ng-template #formularioLogin>
+      <form #loginForm="ngForm" (ngSubmit)="entrar(loginForm)" novalidate>
+        <div class="mb-3">
+          <label for="correo" class="form-label">Correo electrónico</label>
+          <input id="correo" name="correo" type="email" class="form-control" [(ngModel)]="correo" #correoControl="ngModel" required email maxlength="100" autocomplete="username"
+            [ngClass]="{ 'is-invalid': correoControl.invalid && (correoControl.touched || loginForm.submitted) }" aria-describedby="correoError">
+          <div id="correoError" class="invalid-feedback" *ngIf="correoControl.invalid && (correoControl.touched || loginForm.submitted)">Ingresa un correo electrónico válido.</div>
+        </div>
+        <div class="mb-3">
+          <label for="clave" class="form-label">Contraseña</label>
+          <input id="clave" name="clave" type="password" class="form-control" [(ngModel)]="clave" #claveControl="ngModel" required minlength="6" maxlength="100" autocomplete="current-password"
+            [ngClass]="{ 'is-invalid': claveControl.invalid && (claveControl.touched || loginForm.submitted) }" aria-describedby="claveError">
+          <div id="claveError" class="invalid-feedback" *ngIf="claveControl.invalid && (claveControl.touched || loginForm.submitted)">Ingresa una contraseña de al menos 6 caracteres.</div>
+        </div>
+        <p class="alert alert-danger" role="alert" *ngIf="error()">{{ error() }}</p>
+        <button class="btn btn-success w-100" type="submit">Iniciar sesión</button>
+      </form>
+      <aside class="demo-credentials mt-3"><strong>Cuenta de prueba</strong><p class="mb-1">Correo: <code>{{ cuentaDemo.correo }}</code></p><p class="mb-0">Contraseña: <code>{{ cuentaDemo.clave }}</code></p></aside>
+    </ng-template>
+    <a routerLink="/home">Volver al inicio</a>
+  </article>
+</section>
