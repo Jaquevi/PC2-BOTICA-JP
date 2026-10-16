@@ -6,5 +6,5 @@
   @for (item of carrito.items(); track item.producto.id) {
     <div class="carrito-item"><span>{{ item.producto.nombre }} × {{ item.cantidad }}</span><div>{{ item.producto.precio * item.cantidad | currency:'PEN':'S/ ':'1.2-2' }} <button class="btn-eliminar" (click)="carrito.eliminar(item.producto.id)" [attr.aria-label]="'Eliminar ' + item.producto.nombre">Eliminar</button></div></div>
   } @empty { <p>Tu carrito está vacío. Agrega productos desde nuestro catálogo.</p><a routerLink="/productos">Ver productos →</a> }
-  @if (carrito.items().length) { <div class="cart-total"><h3 class="h4">Total: {{ carrito.total() | currency:'PEN':'S/ ':'1.2-2' }}</h3><button class="btn-primary" (click)="finalizar()">Finalizar compra demo</button></div><small>Carrito de demostración. No procesa pagos.</small> }
+  @if (carrito.items().length) { <div class="cart-total"><h3 class="h4">Total: {{ carrito.total() | currency:'PEN':'S/ ':'1.2-2' }}</h3><button class="btn-primary" (click)="finalizar()">Finalizar compra</button></div><small>Carrito de demostración. No procesa pagos.</small> }
 </div></div></section>
